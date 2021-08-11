@@ -1,13 +1,27 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const workout = reuqire("./models/workout.js");
+const logger = require("morgan");
+const workout = require("./models/workout.js");
+const routes = require("./public/api.js")
+const PORT = process.env.PORT || 3000;
 
-// Create a connection to MongoDB in Heroku if env is set. Else, connect to the
-// local MongoDB server and use the database named `dbExample`. The options
-// object contains some boilerplate settings. You can research them to see what
-// they do, but knowing what each option is for isn't important for now.
+//  
+const app = express();
+
+app.use(logger("dev"))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static("public"));
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutDB", {
   useNewUrlParser: true,
+  useFindAndModify: false,
   useUnifiedTopology: true,
-  useCreateIndex: true,
 });
+
+
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
+  });
+  
