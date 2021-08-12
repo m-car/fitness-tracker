@@ -136,6 +136,8 @@ const workoutSeed = [
 //     process.exit(1);
 //   });
 
+///WHY DID THIS WORK
+
   db.deleteMany({})
   .then(() => db.collection.insertMany(workoutSeed))
   .then((data) => {
