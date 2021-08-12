@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 // Construct as schema for an Example document.
-const workoutSchema = new mongoose.Schema({
+const workoutSchema = new Schema({
   // Mongoose allows use of built-in types from javascript as well as other
   // types included in the library.
   // (https://mongoosejs.com/docs/schematypes.html) See the documentation on
