@@ -25,7 +25,7 @@ router.get("/api/workouts", (req, res) => {
      });
  });
 
- 
+
 router.put("/api/workouts/:id", async (req, res) => {
   try {
     const workoutData = await Workout.findByIdAndUpdate(req.params.id, {
@@ -47,12 +47,15 @@ router.post("/api/workouts", async (req, res) => {
 });
 
 router.get("/api/workouts/range", async (req, res) => {
-  try {
-    const workoutData = await Workout.find();
-    res.json(workoutData);
-  } catch (err) {
-    res.json(err);
-  }
+ Workout.aggregate([
+     { $addFields: { totalDuration: { $sum: "$exercises.duration" } } },
+   ])
+     .then((dbWorkouts) => {
+       res.json(dbWorkouts);
+     })
+     .catch((err) => {
+       res.json(err);
+     });
 });
 
 
