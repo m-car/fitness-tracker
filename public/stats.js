@@ -30,7 +30,8 @@ function populateChart(data) {
       weekday: 'short',
       month: 'short',
       day: 'numeric',
-    }).format(date);
+    })
+    .format(date);
   });
 
   const lineChart = new Chart(line, {
